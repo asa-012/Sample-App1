@@ -1,0 +1,2 @@
+rootProject.name = "Atrae-Sample-App1"
+include ':app'
