@@ -32,7 +32,7 @@ interface UsersApiService {
     //@GET("api/users?page=2")
 //fun apiUsers():Call<List<RandomUsersDataPage>>
     @GET("posts/1")
-    suspend fun apiUsers(): Call<UsersDataSample>
+    fun apiUsers(): Call<UsersDataSample>
 }
 
 /**
