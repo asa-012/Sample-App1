@@ -8,7 +8,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
+/**このファイルはRepositoryからしかアクセスできない？
+ *
+ */
+
+private const val BASE_URL = "https://reqres.in/"
 
 /**
  * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
@@ -32,7 +36,7 @@ interface UsersApiService {
     //@GET("api/users?page=2")
 //fun apiUsers():Call<List<RandomUsersDataPage>>
     @GET("posts/1")
-    fun apiUsers(): Call<UsersDataSample>
+    suspend fun apiUsers(): List<UsersDataSample>
 }
 
 /**
