@@ -24,10 +24,10 @@ class MainViewModel : ViewModel() {
     // Internally, we use a MutableLiveData, because we will be updating the List of MarsProperty
     // with new values
     //リストにする List<UserProperty>
-    private val _properties = MutableLiveData<UsersDataSample>()
+    private val _properties = MutableLiveData<List<UsersDataSample>>()
 
     // The external LiveData interface to the property is immutable, so only this class can modify
-    val properties: LiveData<UsersDataSample>
+    val properties: LiveData<List<UsersDataSample>>
         get() = _properties
 
     // LiveData to handle navigation to the selected property
@@ -50,7 +50,7 @@ class MainViewModel : ViewModel() {
                 _status.value = UsersApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = UsersApiStatus.ERROR
-                _properties.value = UsersDataSample(-1,"")
+                _properties.value = ArrayList()
             }
         }
     }
