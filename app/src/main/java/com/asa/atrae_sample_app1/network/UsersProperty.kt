@@ -6,4 +6,4 @@ data class RandomUsersDataPage(var data_list:List<UsersDataSample>)
 
 //data class UsersData(var id:Int,var email:String,var first_name:String,var last_name:String,var avatar:String)
 
-data class UsersDataSample(var id:Int,var title:String)
+data class UsersDataSample(var id:Int,var email:String)

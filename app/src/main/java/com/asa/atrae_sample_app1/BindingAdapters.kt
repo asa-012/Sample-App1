@@ -19,8 +19,10 @@ package com.asa.atrae_sample_app1
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.asa.atrae_sample_app1.main.UsersApiStatus
+import com.asa.atrae_sample_app1.network.UsersDataSample
 
 ///**
 // * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
@@ -68,4 +70,16 @@ fun bindStatus(statusImageView: ImageView, status: UsersApiStatus?) {
             statusImageView.visibility = View.GONE
         }
     }
+}
+
+@BindingAdapter("userId")
+fun userIdDisplay(textview:TextView,data:UsersDataSample){
+    textview.visibility = View.VISIBLE
+    textview.text = data.id.toString()
+}
+
+@BindingAdapter("userEmail")
+fun userEmailDisplay(textview:TextView,data:UsersDataSample){
+    textview.visibility = View.VISIBLE
+    textview.text = data.email
 }

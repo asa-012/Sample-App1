@@ -28,29 +28,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:text="@{viewModel.properties.id}"
         app:layout_constraintBottom_toTopOf="@+id/main_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:userId="@{viewModel.properties[0]}"/>
 
     <TextView
         android:id="@+id/main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:text="@{viewModel.properties.title}"
         app:layout_constraintBottom_toTopOf="@+id/button_example"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:userEmail="@{viewModel.properties[0]}"/>
 
-    <ImageView
-        android:id="@+id/status_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/status_image"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
