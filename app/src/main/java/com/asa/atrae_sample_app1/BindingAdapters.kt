@@ -75,11 +75,17 @@ fun bindStatus(statusImageView: ImageView, status: UsersApiStatus?) {
 @BindingAdapter("userId")
 fun userIdDisplay(textview:TextView,data:UsersDataSample){
     textview.visibility = View.VISIBLE
-    textview.text = data.id.toString()
+    if(data.id != null) {
+        textview.text = data.id.toString()
+    }else{
+        textview.text = "connection error"
+    }
 }
 
 @BindingAdapter("userEmail")
-fun userEmailDisplay(textview:TextView,data:UsersDataSample){
+fun userEmailDisplay(textview:TextView,data:UsersDataSample?){
     textview.visibility = View.VISIBLE
     textview.text = data.email
 }
+
+
