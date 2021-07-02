@@ -8,6 +8,6 @@ class MainRepository {
     private val userInfo by lazy { UsersApi.retrofitService }
 
     suspend fun getApiService():List<UsersDataSample>{
-        return userInfo.apiUsers() }
+        return userInfo.getProperties() }
 
 }
