@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.asa.atrae_sample_app1.network.RandomUsersDataPage
 import com.asa.atrae_sample_app1.network.UsersApi
 import com.asa.atrae_sample_app1.network.UsersDataSample
 import kotlinx.coroutines.launch
@@ -24,10 +25,10 @@ class MainViewModel : ViewModel() {
     // Internally, we use a MutableLiveData, because we will be updating the List of MarsProperty
     // with new values
     //リストにする List<UserProperty>
-    private val _properties = MutableLiveData<List<UsersDataSample>>()
+    private val _properties = MutableLiveData<RandomUsersDataPage>()
 
     // The external LiveData interface to the property is immutable, so only this class can modify
-    val properties: LiveData<List<UsersDataSample>>
+    val properties: LiveData<RandomUsersDataPage>
         get() = _properties
 
 //    // LiveData to handle navigation to the selected property
@@ -57,7 +58,7 @@ class MainViewModel : ViewModel() {
                 _status.value = UsersApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = UsersApiStatus.ERROR
-                _properties.value = ArrayList()
+                _properties.value = null
             }
         }
     }

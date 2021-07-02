@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@+id/main_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:userId="@{viewModel.properties[0] != null ? viewModel.properties[0] : null }"/>
+        app:userId="@{viewModel.properties.data != null ? viewModel.properties.data : null }"/>
 
     <TextView
         android:id="@+id/main_title"
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_example"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:userEmail="@{viewModel.properties[0] != null ? viewModel.properties[0] : null}"/>
+        app:userEmail="@{viewModel.properties.data != null ? viewModel.properties.data : null}"/>
 
 <!--    <ImageView-->
 <!--        android:id="@+id/status_image"-->
