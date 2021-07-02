@@ -35,44 +35,8 @@ class MainFragment : Fragment() {
         // Giving the binding access to the MainViewModel
         binding.viewModel = mainFragmentViewModel
 
-
-//        // Sets the adapter of the photosGrid RecyclerView with clickHandler lambda that
-//        // tells the viewModel when our property is clicked
-//        binding.photosGrid.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
-//            viewModel.displayPropertyDetails(it)
-//        })
-
-        // Observe the navigateToSelectedProperty LiveData and Navigate when it isn't null
-        // After navigating, call displayPropertyDetailsComplete() so that the ViewModel is ready
-        // for another navigation event.
-
-//        mainFragmentViewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
-//            if ( null != it ) {
-//                // Must find the NavController from the Fragment
-//                //TODO ここで詳細画面にitを渡してあげる必要がある
-//                findNavController().navigate(
-//                    MainFragmentDirections.actionMainFragmentToDetailFragment())
-//                // Tell the ViewModel we've made the navigate call to prevent multiple navigation
-//                mainFragmentViewModel.displayPropertyDetailsComplete()
-//            }
-//        })
-
-//        mainFragmentViewModel.properties.observe(viewLifecycleOwner, Observer {
-//            if(null != it){
-//                binding.mainId.text = it[0].id.toString()
-//                binding.mainTitle.text = it[0].email
-//            }
-//        })
+        binding.listCard.adapter = MainAdapter()
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val button = view.findViewById<Button>(R.id.button_example)
-        button.setOnClickListener{
-            findNavController().navigate(
-                R.id.action_mainFragment_to_detailFragment)
-        }
     }
 }
