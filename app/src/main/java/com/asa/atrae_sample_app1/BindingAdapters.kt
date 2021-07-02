@@ -20,19 +20,27 @@ package com.asa.atrae_sample_app1
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.asa.atrae_sample_app1.main.MainAdapter
 import com.asa.atrae_sample_app1.main.UsersApiStatus
-import com.asa.atrae_sample_app1.network.UsersDataSample
+import com.asa.atrae_sample_app1.network.RandomUsersDataPage
+import com.asa.atrae_sample_app1.network.UsersProperties
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
-///**
-// * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
-// */
-//@BindingAdapter("listData")
-//fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsProperty>?) {
-//    val adapter = recyclerView.adapter as PhotoGridAdapter
-//    adapter.submitList(data)
-//}
-//
+/**
+ * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
+ */
+
+//TODO　dataがなぜRandomUsersDataPage?じゃダメなのか、List<UsersProperties>型なのに
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<UsersProperties>) {
+    val adapter = recyclerView.adapter as MainAdapter
+    adapter.submitList(data)
+}
+
 ///**
 // * Uses the Glide library to load an image by URL into an [ImageView]
 // */
@@ -42,9 +50,10 @@ import com.asa.atrae_sample_app1.network.UsersDataSample
 //        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
 //        Glide.with(imgView.context)
 //                .load(imgUri)
-//                .apply(RequestOptions()
+//                .apply(
+//                    RequestOptions()
 //                        .placeholder(R.drawable.loading_animation)
-//                        .error(R.drawable.ic_broken_image))
+//                        .error(R.drawable.ic_connection_error))
 //                .into(imgView)
 //    }
 //}
@@ -73,21 +82,20 @@ fun bindStatus(statusImageView: ImageView, status: UsersApiStatus?) {
 }
 
 @BindingAdapter("userId")
-fun userIdDisplay(textview:TextView,data:List<UsersDataSample>?){
+fun userIdDisplay(textview:TextView,data:UsersProperties?){
     if(data == null){
         textview.text = "no id data"
-
     }else {
-        textview.text = data[0].id.toString()
+        textview.text = data.id.toString()
     }
 }
 
 @BindingAdapter("userEmail")
-fun userEmailDisplay(textview:TextView,data:List<UsersDataSample>?){
+fun userEmailDisplay(textview:TextView,data:UsersProperties?){
     if(data == null) {
         textview.text = "no email data"
     }else{
-        textview.text = data[0].email
+        textview.text = data.email
     }
 }
 
