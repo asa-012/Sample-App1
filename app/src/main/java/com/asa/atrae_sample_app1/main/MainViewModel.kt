@@ -30,10 +30,17 @@ class MainViewModel : ViewModel() {
     val properties: LiveData<List<UsersDataSample>>
         get() = _properties
 
-    // LiveData to handle navigation to the selected property
-    private val _navigateToSelectedProperty = MutableLiveData<UsersDataSample>()
-    val navigateToSelectedProperty: LiveData<UsersDataSample>
-        get() = _navigateToSelectedProperty
+//    // LiveData to handle navigation to the selected property
+//    private val _navigateToSelectedProperty = MutableLiveData<UsersDataSample>()
+//    val navigateToSelectedProperty: LiveData<UsersDataSample>
+//        get() = _navigateToSelectedProperty
+
+    /**
+     * Call getMarsRealEstateProperties() on init so we can display status immediately.
+     */
+    init {
+        getUsersProperties()
+    }
 
     /**
      * Gets filtered Mars real estate property information from the Mars API Retrofit service and
@@ -41,12 +48,12 @@ class MainViewModel : ViewModel() {
      * returns a coroutine Deferred, which we await to get the result of the transaction.
      * @param filter the [MarsApiFilter] that is sent as part of the web server request
      */
-    fun getUsersProperties() {
+    private fun getUsersProperties() {
 
         viewModelScope.launch {
             _status.value = UsersApiStatus.LOADING
             try {
-                _properties.value = userInfo.apiUsers()
+                _properties.value = userInfo.getProperties()
                 _status.value = UsersApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = UsersApiStatus.ERROR
@@ -55,19 +62,19 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    /**
-     * When the property is clicked, set the [_navigateToSelectedProperty] [MutableLiveData]
-     * @param marsProperty The [MarsProperty] that was clicked on.
-     */
-    fun displayPropertyDetails(usersProperty: UsersDataSample) {
-        _navigateToSelectedProperty.value = usersProperty
-    }
-
-    /**
-     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
-     */
-    fun displayPropertyDetailsComplete() {
-        _navigateToSelectedProperty.value = null
-    }
+//    /**
+//     * When the property is clicked, set the [_navigateToSelectedProperty] [MutableLiveData]
+//     * @param marsProperty The [MarsProperty] that was clicked on.
+//     */
+//    fun displayPropertyDetails(usersProperty: UsersDataSample) {
+//        _navigateToSelectedProperty.value = usersProperty
+//    }
+//
+//    /**
+//     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
+//     */
+//    fun displayPropertyDetailsComplete() {
+//        _navigateToSelectedProperty.value = null
+//    }
 
 }
