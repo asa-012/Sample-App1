@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.asa.atrae_sample_app1.network.RandomUsersDataPage
 import com.asa.atrae_sample_app1.network.UsersApi
-import com.asa.atrae_sample_app1.network.UsersDataSample
+import com.asa.atrae_sample_app1.network.UsersProperties
 import kotlinx.coroutines.launch
 
 enum class UsersApiStatus { LOADING, ERROR, DONE }
@@ -30,11 +30,6 @@ class MainViewModel : ViewModel() {
     // The external LiveData interface to the property is immutable, so only this class can modify
     val properties: LiveData<RandomUsersDataPage>
         get() = _properties
-
-//    // LiveData to handle navigation to the selected property
-//    private val _navigateToSelectedProperty = MutableLiveData<UsersDataSample>()
-//    val navigateToSelectedProperty: LiveData<UsersDataSample>
-//        get() = _navigateToSelectedProperty
 
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
@@ -62,20 +57,5 @@ class MainViewModel : ViewModel() {
             }
         }
     }
-
-//    /**
-//     * When the property is clicked, set the [_navigateToSelectedProperty] [MutableLiveData]
-//     * @param marsProperty The [MarsProperty] that was clicked on.
-//     */
-//    fun displayPropertyDetails(usersProperty: UsersDataSample) {
-//        _navigateToSelectedProperty.value = usersProperty
-//    }
-//
-//    /**
-//     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
-//     */
-//    fun displayPropertyDetailsComplete() {
-//        _navigateToSelectedProperty.value = null
-//    }
 
 }
