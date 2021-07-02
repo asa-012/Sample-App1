@@ -33,10 +33,8 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface UsersApiService {
-    //@GET("api/users?page=2")
-//fun apiUsers():Call<List<RandomUsersDataPage>>
-    @GET("posts/1")
-    suspend fun apiUsers(): List<UsersDataSample>
+    @GET("api/users?page=2")
+    suspend fun getProperties():List<UsersDataSample>
 }
 
 /**
