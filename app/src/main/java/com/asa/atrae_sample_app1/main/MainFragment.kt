@@ -27,13 +27,10 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         val binding = FragmentMainBinding.inflate(inflater)
 
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
-        // Giving the binding access to the MainViewModel
         binding.viewModel = mainFragmentViewModel
 
         binding.listCard.adapter = MainAdapter(mainFragmentViewModel)
