@@ -7,15 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.asa.atrae_sample_app1.databinding.ListItemBinding
 import com.asa.atrae_sample_app1.network.UsersProperties
 
-class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<MainAdapter.UsersPropertyViewHolder>()  {
-
-    class UsersPropertyViewHolder(private var binding: ListItemBinding):
-            RecyclerView.ViewHolder(binding.root) {
-        fun bind(usersProperties: UsersProperties) {
-            binding.property = usersProperties
-            binding.executePendingBindings()
-        }
-    }
+class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<UsersPropertyViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): UsersPropertyViewHolder {
