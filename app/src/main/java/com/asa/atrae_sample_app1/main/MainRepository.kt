@@ -1,15 +1,15 @@
 package com.asa.atrae_sample_app1.main
 
+import androidx.lifecycle.LiveData
 import com.asa.atrae_sample_app1.network.RandomUsersDataPage
 import com.asa.atrae_sample_app1.network.UsersApi
 import com.asa.atrae_sample_app1.network.UsersProperties
 
-class MainRepository {
+interface MainRepository {
 
-    private val userInfo by lazy { UsersApi.retrofitService }
+    val status:LiveData<UsersApiStatus>
+    val properties:LiveData<RandomUsersDataPage>
 
-    suspend fun getApiService():RandomUsersDataPage{
-        return userInfo.getProperties()
-    }
+    suspend fun getUsersProperties()
 
 }
