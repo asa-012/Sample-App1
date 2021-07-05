@@ -35,12 +35,11 @@ import com.bumptech.glide.request.RequestOptions
  * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
  */
 
-//TODO　dataがなぜRandomUsersDataPage?じゃダメなのか、List<UsersProperties>型なのに
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<UsersProperties>?) {
     if(data != null) {
         val adapter = recyclerView.adapter as MainAdapter
-        adapter.submitList(data)
+        adapter.notifyDataSetChanged()
     }else{
         Log.d("recyclerViewError","recyclerviewError")
     }
@@ -86,12 +85,22 @@ fun bindStatus(statusImageView: ImageView, status: UsersApiStatus?) {
     }
 }
 
-@BindingAdapter("userId")
-fun userIdDisplay(textview:TextView,data:UsersProperties?){
+@BindingAdapter("userFirstName")
+fun userFirstNameDisplay(textview:TextView,data:UsersProperties?){
+    if(data == null) {
+        textview.text = "no user first name data"
+    }else{
+        textview.text = data.first_name
+    }
+}
+
+@BindingAdapter("userLastName")
+fun userLastNameDisplay(textview:TextView,data:UsersProperties?){
+    textview.visibility = View.VISIBLE
     if(data == null){
-        textview.text = "no id data"
+        textview.text = "no user last name data"
     }else {
-        textview.text = data.id.toString()
+        textview.text = data.last_name
     }
 }
 
@@ -101,6 +110,23 @@ fun userEmailDisplay(textview:TextView,data:UsersProperties?){
         textview.text = "no email data"
     }else{
         textview.text = data.email
+    }
+}
+
+@BindingAdapter("userImage")
+fun userImageDisplay(imageView: ImageView,data:UsersProperties?){
+    if(data != null) {
+        imageView.let {
+            val imgUri = data.avatar.toUri().buildUpon().scheme("https").build()
+            Glide.with(imageView.context)
+                .load(imgUri)
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_connection_error)
+                )
+                .into(imageView)
+        }
     }
 }
 
