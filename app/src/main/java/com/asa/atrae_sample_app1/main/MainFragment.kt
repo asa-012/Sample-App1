@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.asa.atrae_sample_app1.R
 import com.asa.atrae_sample_app1.databinding.FragmentMainBinding
 
@@ -36,6 +37,10 @@ class MainFragment : Fragment() {
         binding.viewModel = mainFragmentViewModel
 
         binding.listCard.adapter = MainAdapter(mainFragmentViewModel)
+
+        val separateLine = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+
+        binding.listCard.addItemDecoration(separateLine)
 
         return binding.root
     }
