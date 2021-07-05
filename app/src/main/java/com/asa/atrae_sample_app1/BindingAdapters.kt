@@ -17,6 +17,7 @@
 
 package com.asa.atrae_sample_app1
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -36,9 +37,13 @@ import com.bumptech.glide.request.RequestOptions
 
 //TODO　dataがなぜRandomUsersDataPage?じゃダメなのか、List<UsersProperties>型なのに
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<UsersProperties>) {
-    val adapter = recyclerView.adapter as MainAdapter
-    adapter.submitList(data)
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<UsersProperties>?) {
+    if(data != null) {
+        val adapter = recyclerView.adapter as MainAdapter
+        adapter.submitList(data)
+    }else{
+        Log.d("recyclerViewError","recyclerviewError")
+    }
 }
 
 ///**
