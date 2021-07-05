@@ -9,6 +9,7 @@ class MainRepository {
     private val userInfo by lazy { UsersApi.retrofitService }
 
     suspend fun getApiService():RandomUsersDataPage{
-        return userInfo.getProperties() }
+        return userInfo.getProperties()
+    }
 
 }
