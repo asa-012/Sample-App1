@@ -35,7 +35,7 @@ class MainFragment : Fragment() {
         // Giving the binding access to the MainViewModel
         binding.viewModel = mainFragmentViewModel
 
-        binding.listCard.adapter = MainAdapter()
+        binding.listCard.adapter = MainAdapter(mainFragmentViewModel)
 
         return binding.root
     }
