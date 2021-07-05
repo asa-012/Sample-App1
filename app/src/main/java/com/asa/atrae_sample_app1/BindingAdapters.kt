@@ -17,44 +17,30 @@
 
 package com.asa.atrae_sample_app1
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.asa.atrae_sample_app1.main.MainAdapter
 import com.asa.atrae_sample_app1.main.UsersApiStatus
-import com.asa.atrae_sample_app1.network.UsersDataSample
+import com.asa.atrae_sample_app1.network.RandomUsersDataPage
+import com.asa.atrae_sample_app1.network.UsersProperties
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
-///**
-// * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
-// */
-//@BindingAdapter("listData")
-//fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsProperty>?) {
-//    val adapter = recyclerView.adapter as PhotoGridAdapter
-//    adapter.submitList(data)
-//}
-//
-///**
-// * Uses the Glide library to load an image by URL into an [ImageView]
-// */
-//@BindingAdapter("imageUrl")
-//fun bindImage(imgView: ImageView, imgUrl: String?) {
-//    imgUrl?.let {
-//        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-//        Glide.with(imgView.context)
-//                .load(imgUri)
-//                .apply(RequestOptions()
-//                        .placeholder(R.drawable.loading_animation)
-//                        .error(R.drawable.ic_broken_image))
-//                .into(imgView)
-//    }
-//}
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<UsersProperties>?) {
+    if(data != null) {
+        val adapter = recyclerView.adapter as MainAdapter
+        adapter.notifyDataSetChanged()
+    }else{
+        Log.d("recyclerViewError","recyclerviewError")
+    }
+}
 
-/**
- * This binding adapter displays the [MarsApiStatus] of the network request in an image view.  When
- * the request is loading, it displays a loading_animation.  If the request has an error, it
- * displays a broken image to reflect the connection error.  When the request is finished, it
- * hides the image view.
- */
 @BindingAdapter("usersApiStatus")
 fun bindStatus(statusImageView: ImageView, status: UsersApiStatus?) {
     when (status) {
@@ -72,20 +58,36 @@ fun bindStatus(statusImageView: ImageView, status: UsersApiStatus?) {
     }
 }
 
-@BindingAdapter("userId")
-fun userIdDisplay(textview:TextView,data:UsersDataSample){
-    textview.visibility = View.VISIBLE
-    if(data.id != null) {
-        textview.text = data.id.toString()
-    }else{
-        textview.text = "connection error"
-    }
+@BindingAdapter("userFirstName")
+fun userFirstNameDisplay(textview:TextView,data:UsersProperties?){
+    textview.text = data?.first_name ?: "no user first name data"
+}
+
+@BindingAdapter("userLastName")
+fun userLastNameDisplay(textview:TextView,data:UsersProperties?){
+    textview.text = data?.last_name ?: "no user last name data"
 }
 
 @BindingAdapter("userEmail")
-fun userEmailDisplay(textview:TextView,data:UsersDataSample?){
-    textview.visibility = View.VISIBLE
-    textview.text = data.email
+fun userEmailDisplay(textview:TextView,data:UsersProperties?){
+    textview.text = data?.email ?: "no user email data"
+}
+
+@BindingAdapter("userImage")
+fun userImageDisplay(imageView: ImageView,data:UsersProperties?){
+    if(data != null) {
+        imageView.let {
+            val imgUri = data.avatar.toUri().buildUpon().scheme("https").build()
+            Glide.with(it.context)
+                .load(imgUri)
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_connection_error)
+                )
+                .into(it)
+        }
+    }
 }
 
 
