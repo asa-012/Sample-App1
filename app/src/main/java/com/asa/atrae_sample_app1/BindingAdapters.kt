@@ -60,30 +60,17 @@ fun bindStatus(statusImageView: ImageView, status: UsersApiStatus?) {
 
 @BindingAdapter("userFirstName")
 fun userFirstNameDisplay(textview:TextView,data:UsersProperties?){
-    if(data == null) {
-        textview.text = "no user first name data"
-    }else{
-        textview.text = data.first_name
-    }
+    textview.text = data?.first_name ?: "no user first name data"
 }
 
 @BindingAdapter("userLastName")
 fun userLastNameDisplay(textview:TextView,data:UsersProperties?){
-    textview.visibility = View.VISIBLE
-    if(data == null){
-        textview.text = "no user last name data"
-    }else {
-        textview.text = data.last_name
-    }
+    textview.text = data?.last_name ?: "no user last name data"
 }
 
 @BindingAdapter("userEmail")
 fun userEmailDisplay(textview:TextView,data:UsersProperties?){
-    if(data == null) {
-        textview.text = "no email data"
-    }else{
-        textview.text = data.email
-    }
+    textview.text = data?.email ?: "no user email data"
 }
 
 @BindingAdapter("userImage")
@@ -91,14 +78,14 @@ fun userImageDisplay(imageView: ImageView,data:UsersProperties?){
     if(data != null) {
         imageView.let {
             val imgUri = data.avatar.toUri().buildUpon().scheme("https").build()
-            Glide.with(imageView.context)
+            Glide.with(it.context)
                 .load(imgUri)
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.loading_animation)
                         .error(R.drawable.ic_connection_error)
                 )
-                .into(imageView)
+                .into(it)
         }
     }
 }
